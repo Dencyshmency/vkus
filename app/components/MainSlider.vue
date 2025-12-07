@@ -17,12 +17,78 @@
         </swiper-slide>
       </swiper>
       <div class="main-text">
-        <p>Вы</p>
-        <p>скорее всего</p>
-        <p>уже с <span>нами</span></p>
-        <p>знакомы потому,</p>
-        <p><span>давайте</span></p>
-        <p>будем кратки.</p>
+        <BlurText
+          v-if="!preloader && isVisible"
+          :delay="200"
+          text="Вы"
+          class-name="text-2xl font-semibold text-center"
+          animate-by="words"
+          direction="top"
+          :threshold="0.1"
+          root-margin="0px"
+          :step-duration="0.35"
+        ></BlurText>
+
+        <BlurText
+          v-if="showSecondText"
+          :delay="200"
+          text="скорее всего"
+          class-name="text-2xl font-semibold text-center"
+          animate-by="words"
+          direction="top"
+          :threshold="0.1"
+          root-margin="0px"
+          :step-duration="0.35"
+        ></BlurText>
+
+        <BlurText
+          v-if="showThirdText"
+          :delay="200"
+          text=" уже с нами"
+          class-name="text-2xl font-semibold text-center"
+          animate-by="words"
+          direction="top"
+          :threshold="0.1"
+          root-margin="0px"
+          :step-duration="0.35"
+        ></BlurText>
+
+        <BlurText
+          v-if="showFourthText"
+          :delay="200"
+          text="уже с нами знакомы потому "
+          class-name="text-2xl font-semibold text-center"
+          animate-by="words"
+          direction="top"
+          :threshold="0.1"
+          root-margin="0px"
+          :step-duration="0.35"
+        ></BlurText>
+
+        <BlurText
+          v-if="showFifthText"
+          :delay="200"
+          text="давайте"
+          class-name="text-2xl font-semibold text-center"
+          animate-by="words"
+          direction="top"
+          :threshold="0.1"
+          root-margin="0px"
+          :step-duration="0.35"
+        ></BlurText>
+
+        <BlurText
+          v-if="showSixthText"
+          :delay="200"
+          text="будем кратки."
+          class-name="text-2xl font-semibold text-center"
+          animate-by="words"
+          direction="top"
+          :threshold="0.1"
+          root-margin="0px"
+          :step-duration="0.35"
+        ></BlurText>
+
         <div class="main-btns">
           <a href="" class="buy-btn"><img :src="link" /></a>
           <a href="" class="call-btn">
@@ -51,12 +117,55 @@
 </template>
 
 <script setup>
+import BlurText from "~/components/UI/BlurText.vue";
+
 import mainBg from "@/assets/images/main.png";
 import slideImage1 from "@/assets/images/slide.png";
 import link from "@/assets/images/link.svg";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { ref } from "vue";
+import { ref, watch, inject } from "vue";
 import "swiper/css";
+
+const preloader = inject("preloader");
+const isVisible = ref(false);
+
+const showSecondText = ref(false);
+const showThirdText = ref(false);
+const showFourthText = ref(false);
+const showFifthText = ref(false);
+const showSixthText = ref(false);
+
+watch(preloader, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+      isVisible.value = true;
+
+      startTextAnimationChain();
+    }, 100);
+  }
+});
+
+const startTextAnimationChain = () => {
+  setTimeout(() => {
+    showSecondText.value = true;
+  }, 500);
+
+  setTimeout(() => {
+    showThirdText.value = true;
+  }, 1300);
+
+  setTimeout(() => {
+    showFourthText.value = true;
+  }, 2100);
+
+  setTimeout(() => {
+    showFifthText.value = true;
+  }, 2900);
+
+  setTimeout(() => {
+    showSixthText.value = true;
+  }, 3700);
+};
 
 const sliderStyle = {
   backgroundImage: `url(${mainBg})`,
@@ -102,37 +211,52 @@ const currentSlideText = ref("Круассан");
   right: 100px;
   top: 380px;
   width: 639px;
+  transition: all 0.3s ease;
 }
 
-.main-text p {
+.main-text p div {
   font-family: "Arial", sans-serif;
   font-weight: 700;
   font-size: 72px;
   line-height: 83%;
   letter-spacing: -0.03em;
   color: #272525;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-.main-text p:nth-child(1) {
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-text p:nth-child(1) div:first-child {
   text-indent: 190px;
 }
-.main-text p:nth-child(2) {
+.main-text p:nth-child(2) div:first-child {
   text-indent: 80px;
 }
-.main-text p:nth-child(3) {
+.main-text p:nth-child(3) div:first-child {
   text-indent: 20px;
 }
-.main-text p:nth-child(4) {
+.main-text p:nth-child(4) div:first-child {
   text-indent: 0;
 }
-.main-text p:nth-child(5) {
+.main-text p:nth-child(5) div:first-child {
   text-indent: 0;
 }
-.main-text p:nth-child(6) {
+.main-text p:nth-child(6) div:first-child {
   text-indent: 100px;
 }
 
-.main-text p span {
+.main-text p:nth-child(3) div:nth-child(3) {
+  color: #ff6905;
+}
+
+.main-text p:nth-child(5) div {
   color: #ff6905;
 }
 
@@ -140,23 +264,6 @@ const currentSlideText = ref("Круассан");
   width: 100%;
   height: 100%;
 }
-
-/* .swiper-slide {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1000ms ease-in-out;
-  display: flex;
-  align-items: center;
-}
-
-.swiper-slide-active {
-  opacity: 1;
-}
-
-.first-slide.swiper-slide-active {
-  animation: fadeIn 1.5s ease-in-out;
-} */
 
 @keyframes fadeIn {
   from {
@@ -171,7 +278,6 @@ const currentSlideText = ref("Круассан");
   width: 100%;
   height: 100%;
   margin-top: auto;
-  /* pointer-events: none; */
 }
 
 .slide-image {
