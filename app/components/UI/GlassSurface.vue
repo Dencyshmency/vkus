@@ -459,6 +459,6 @@ onMounted(() => {
   position: absolute;
   top: 0;
   left: 0;
-  background: #4aaecd2e;
+  background: #00000060;
 }
 </style>
