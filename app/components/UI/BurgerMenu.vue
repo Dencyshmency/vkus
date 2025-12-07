@@ -6,15 +6,17 @@
       class="top-0 right-0 z-10 absolute flex flex-col bg-white backdrop-blur-[12px] p-[6em_2em_2em_2em] h-full overflow-y-auto staggered-menu-panel"
       :aria-hidden="!open"
     >
-      <GlassSurface
-        :width="'100%'"
-        :height="'100%'"
-        :displace="7"
-        :borderWidth="0.07"
-        :saturation="1"
-        :distortionScale="-180"
-        class="glass-item"
-      />
+      <ClientOnly>
+        <GlassSurface
+          :width="'100%'"
+          :height="'100%'"
+          :displace="7"
+          :borderWidth="0.07"
+          :saturation="1"
+          :distortionScale="-180"
+          class="glass-item"
+        />
+      </ClientOnly>
       <div class="flex flex-col flex-1 gap-5 sm-panel-inner">
         <ul
           class="flex flex-col gap-2 m-0 p-0 list-none sm-panel-list"
