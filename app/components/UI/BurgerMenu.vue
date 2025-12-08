@@ -566,6 +566,10 @@ aside {
   height: 100%;
 }
 
+.glass-item {
+  background: #ff69054e !important;
+}
+
 @media (max-width: 1024px) {
   .staggered-menu-panel {
     width: 100%;

@@ -8,6 +8,7 @@
             v-for="(item, index) in CardData"
             :key="item.id || index"
             @click="openPopup(item)"
+            :style="{ backgroundImage: `url(${item.img})` }"
           >
             <div>
               <span>{{ item.number }}</span>
@@ -38,7 +39,10 @@ import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import mainBg from "@/assets/images/main.png";
-
+// import img1 from "@/assets/images/slide2.png";
+// import img2 from "@/assets/images/cakes.png";
+// import img3 from "@/assets/images/tort.png";
+// import img4 from "@/assets/images/is.png";
 const CardData = [
   {
     id: "01",
@@ -199,26 +203,28 @@ onMounted(() => {
   justify-content: space-between;
   cursor: pointer;
   transition: transform 0.2s ease;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .about-item:hover {
-  transform: scale(1.02);
+  transform: scale(1.02) translate(0px, 0);
 }
 
 .about-item:nth-child(1) {
-  transform: rotate(-4deg);
+  transform: rotate(-4deg) translate(0px, 0);
 }
 
 .about-item:nth-child(2) {
-  transform: rotate(3deg);
+  transform: rotate(3deg) translate(0px, 0);
 }
 
 .about-item:nth-child(3) {
-  transform: rotate(-2deg);
+  transform: rotate(-2deg) translate(0px, 0);
 }
 
 .about-item:nth-child(4) {
-  transform: rotate(4deg);
+  transform: rotate(4deg) translate(0px, 0);
 }
 
 .about-item > p {

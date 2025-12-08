@@ -92,6 +92,7 @@ header {
   width: 100%;
   position: relative;
   z-index: 9;
+  padding: 0 10px;
 }
 
 .menu-btn {
@@ -145,7 +146,7 @@ header {
 }
 
 .logo-header img {
-  width: calc((90 / var(--curent-size)) * 100vw);
-  height: calc((90 / var(--curent-size)) * 100vw);
+  width: calc((70 / var(--curent-size)) * 100vw);
+  height: calc((70 / var(--curent-size)) * 100vw);
 }
 </style>

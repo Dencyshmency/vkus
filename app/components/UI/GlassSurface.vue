@@ -5,7 +5,7 @@
     :style="containerStyles"
   >
     <svg
-      class="w-full h-full pointer-events-none absolute inset-0 opacity-0 -z-10 glass"
+      class="w-full h-full pointer-events-none glass absolute inset-0 opacity-0 -z-10"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
@@ -459,6 +459,5 @@ onMounted(() => {
   position: absolute;
   top: 0;
   left: 0;
-  background: #00000060;
 }
 </style>
